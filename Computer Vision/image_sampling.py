@@ -1,7 +1,5 @@
 import math
 
-def up_sample_1d(image):
-    new_image = []
     
 def down_sample_1d(image, new_image_width):
     image_width = len(image)
@@ -24,6 +22,7 @@ def down_sample_1d(image, new_image_width):
         #missing = 1
         missing = new_image_width - len(new_image)
         new_image.append(image[image_width-missing])
+        
     return new_image
 
 
@@ -37,7 +36,7 @@ def down_sample_2d(image, new_image_width, new_image_height):
     
     new_image = []
     
-    ratio_width = round(image_width/new_image_width)
+
     ratio_height = round(image_height/new_image_height)
     index = 0
     while index < image_height and len(new_image) < new_image_height:
@@ -55,19 +54,65 @@ def down_sample_2d(image, new_image_width, new_image_height):
         
             
     
+def up_sample_1d(image, new_image_width):
+    image_width = len(image)
+    if image_width >= new_image_width:
+        print("Invalid arguments")
+        return -1
     
-def up_sample_2d(image):
     new_image = []
+    ratio = round(new_image_width/image_width)
+    for i in range(image_width):
+        for j in range(ratio):
+            if len(new_image) >= new_image_width:
+                break
+            new_image.append(image[i])
+    
+    
+    while len(new_image) < new_image_width:
+        #missing = 1
+        missing = new_image_width - len(new_image)
+        new_image.append(image[image_width-missing])
+        
+        
+    return new_image
+        
+    
+    
+def up_sample_2d(image, new_image_width, new_image_height):
+    image_height = len(image)
+    image_width = len(image[image_height - 1])
+    if image_width >= new_image_width or image_height >= new_image_height:
+        print("Invalid arguments")
+        return -1
+    
+    
+    new_image = []
+    ratio_height = round(new_image_height / image_height)
+    
+    for i in range(image_height):
+        for j in range(ratio_height):
+            if len(new_image) >= new_image_height:
+                break
+            row = up_sample_1d(image[i], new_image_width)
+            new_image.append(row)
+            
+            
+    
+    while len(new_image) < new_image_width:
+        #missing = 1
+        missing = new_image_width - len(new_image)
+        row = up_sample_1d(image[image_width-missing], new_image_width)
+        new_image.append(row)
+    
+    return new_image
+        
+
     
 
     
     
-    
-    
-    
-    
-    
-    
+"""
 image = [1,2,3,4,5,6,7,8,9,10]
 for i in range(2, len(image)):
     print(down_sample_1d(image, i))
@@ -78,3 +123,22 @@ image = [[1,2,3,4,5]
          , [2,3,4,5,6]
          , [9,8,7,6,4]]
 print(down_sample_2d(image, 2, 3))
+
+
+image = [1,2,3]
+print(up_sample_1d(image, 5))
+
+"""
+
+image = [
+    [1,2,3]
+    ,[4,5,6]
+    ,[7,8,9]
+    ]
+new_image = up_sample_2d(image, 4, 4)
+for i in range(len(new_image)):
+    print(new_image[i])
+    
+new_image = down_sample_2d(new_image, 3, 3)
+for i in range(len(new_image)):
+    print(new_image[i])
