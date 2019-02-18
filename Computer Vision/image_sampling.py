@@ -99,10 +99,10 @@ def up_sample_2d(image, new_image_width, new_image_height):
             
             
     
-    while len(new_image) < new_image_width:
+    while len(new_image) < new_image_height:
         #missing = 1
-        missing = new_image_width - len(new_image)
-        row = up_sample_1d(image[image_width-missing], new_image_width)
+        missing = new_image_height - len(new_image)
+        row = up_sample_1d(image[image_height-missing], new_image_width)
         new_image.append(row)
     
     return new_image
@@ -112,7 +112,6 @@ def up_sample_2d(image, new_image_width, new_image_height):
 
     
     
-"""
 image = [1,2,3,4,5,6,7,8,9,10]
 for i in range(2, len(image)):
     print(down_sample_1d(image, i))
@@ -122,13 +121,22 @@ image = [[1,2,3,4,5]
          , [4,5,6,7,8]
          , [2,3,4,5,6]
          , [9,8,7,6,4]]
-print(down_sample_2d(image, 2, 3))
-
+new_image = down_sample_2d(image, 2, 3)
+print("DOWN SAMPLED 2d: ")
+for i in new_image:
+    print(i)
+print()
+    
+new_image = up_sample_2d(new_image, 5, 4)
+print("UP SAMPLED 2d: ")
+for i in new_image:
+    print(i)
+print()
 
 image = [1,2,3]
+print("UP SAMPLE 1d")
 print(up_sample_1d(image, 5))
-
-"""
+print()
 
 image = [
     [1,2,3]
