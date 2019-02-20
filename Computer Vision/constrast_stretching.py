@@ -2,6 +2,33 @@ def display_matrix(matrix):
     for i in matrix:
         print(i)
     print()
+
+def get_pixels_array_with_count(img):
+    pixels = []
+    for i in range(max_2d(img) + 1):
+        pixels.append(0)
+    
+    image_height = len(img)
+    image_width = len(img[image_height - 1])
+    
+    for i in range(image_height):
+        for j in range(image_width):
+            pix = img[i][j]
+            pixels[pix] += 1
+    return pixels
+    
+def display_histogram(img, width = 10):
+    image_height = len(img)
+    image_width = len(img[image_height - 1])
+    total_pixels = image_height*image_width
+    pixel_count = get_pixels_array_with_count(img)
+    #print(pixel_count)
+    for i in range(len(pixel_count)):
+        if pixel_count[i] > 0:
+            prop = (pixel_count[i]/total_pixels)
+            stars = "*"*(int(prop*width))
+            print("{:3} {:3} {}".format(i, pixel_count[i], stars))
+    print()
     
 def max_2d(matrix):
     matrix_height = len(matrix)
@@ -56,3 +83,8 @@ a32 = constrast_stretching_2d(32, img)
 display_matrix(a32)
 a255 = constrast_stretching_2d(255, img)
 display_matrix(a255)
+
+display_histogram(img, 20)
+display_histogram(a16, 20)
+display_histogram(a32, 20)
+display_histogram(a255, 20)
