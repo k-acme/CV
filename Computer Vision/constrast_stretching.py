@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 def display_matrix(matrix):
     for i in matrix:
         print(i)
@@ -29,6 +31,7 @@ def display_histogram(img, width = 10):
             stars = "*"*(int(prop*width))
             print("{:3} {:3} {}".format(i, pixel_count[i], stars))
     print()
+    #plt.plot(pixel_count)
     
 def max_2d(matrix):
     matrix_height = len(matrix)
