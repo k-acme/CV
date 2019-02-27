@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+#import matplotlib as plt
 
 def display_matrix(matrix):
     for i in matrix:
@@ -19,7 +19,7 @@ def get_pixels_array_with_count(img):
             pixels[pix] += 1
     return pixels
     
-def display_histogram(img, width = 10):
+def display_histogram_cdf(img, width = 10):
     image_height = len(img)
     image_width = len(img[image_height - 1])
     total_pixels = image_height*image_width
@@ -27,6 +27,22 @@ def display_histogram(img, width = 10):
     #print(pixel_count)
     for i in range(len(pixel_count)):
         if pixel_count[i] > 0:
+            prop = (pixel_count[i]/total_pixels)
+            stars = "*"*(int(prop*width))
+            print("{:3} {:3} {}".format(i, pixel_count[i], stars))
+    print()
+    #plt.plot(pixel_count)
+    
+def display_histogram_pdf(img, width = 10):
+    image_height = len(img)
+    image_width = len(img[image_height - 1])
+    total_pixels = image_height*image_width
+    pixel_count = get_pixels_array_with_count(img)
+    #print(pixel_count)
+    for i in range(len(pixel_count)):
+        if i > 0:
+            pixel_count[i] = pixel_count[i-1] + pixel_count[i]
+        if pixel_count[i] > 0 or True:
             prop = (pixel_count[i]/total_pixels)
             stars = "*"*(int(prop*width))
             print("{:3} {:3} {}".format(i, pixel_count[i], stars))
@@ -87,7 +103,17 @@ display_matrix(a32)
 a255 = constrast_stretching_2d(255, img)
 display_matrix(a255)
 
-display_histogram(img, 20)
-display_histogram(a16, 20)
-display_histogram(a32, 20)
-display_histogram(a255, 20)
+display_histogram_cdf(img, 20)
+display_histogram_cdf(a16, 20)
+display_histogram_cdf(a32, 20)
+display_histogram_cdf(a255, 20)
+
+print()
+print()
+
+
+
+display_histogram_pdf(img, 20)
+display_histogram_pdf(a16, 20)
+display_histogram_pdf(a32, 20)
+display_histogram_pdf(a255, 20)
