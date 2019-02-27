@@ -20,8 +20,8 @@ def filter_image(image, filter_, v = False):
             row.append(image[i][j])
         new_image.append(row)
     
-    for i in range(1, len(image)-1):
-        for j in range(1, len(image[i])-1):
+    for i in range(len(image)):
+        for j in range(len(image[i])):
             #filtering
             filter_center_row = int(len(filter_)/2)
             filter_center_col = int(len(filter_[filter_center_row])/2)
@@ -46,12 +46,8 @@ def grad_image(gx, gy):
     for i in range(len(gx)):
         row = []
         for j in range(len(gx[i])):
-            row.append(0)
+            row.append(int(math.sqrt(math.pow(gx[i][j], 2) + math.pow(gy[i][j], 2))))
         new_image.append(row)
-        
-    for i in range(len(gx)):
-        for j in range(len(gx[i])):
-            new_image[i][j] = int(math.sqrt(math.pow(gx[i][j], 2) + math.pow(gy[i][j], 2)))
     return new_image
 
 def display_image(img):
