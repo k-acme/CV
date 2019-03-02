@@ -51,6 +51,9 @@ class Graph:
         level = 0
         while stack:
             node, level= stack.pop()
+            if node in visited:
+                continue
+            
             visited.append(node)
             children = self.get_children(node)
             
@@ -105,7 +108,7 @@ g.create_graph(cityGraph)
 
 for i in range(14):
     print("limit: " + str(i))
-    print(g.iter_dfs('Oradea', i, 'Rimnicu Vilcea'))
+    print(g.iter_dfs('Oradea', i))
 
         
     

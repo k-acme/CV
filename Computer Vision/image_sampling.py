@@ -17,12 +17,12 @@ def down_sample_1d(image, new_image_width):
         #skipping pixels
         for i in range(ratio):
             index += 1
-    
+    """
     while len(new_image) < new_image_width:
         #missing = 1
         missing = new_image_width - len(new_image)
         new_image.append(image[image_width-missing])
-        
+    """
     return new_image
 
 
@@ -111,7 +111,7 @@ def up_sample_2d(image, new_image_width, new_image_height):
     
 
     
-    
+"""
 image = [1,2,3,4,5,6,7,8,9,10]
 for i in range(2, len(image)):
     print(down_sample_1d(image, i))
@@ -150,3 +150,5 @@ for i in range(len(new_image)):
 new_image = down_sample_2d(new_image, 3, 3)
 for i in range(len(new_image)):
     print(new_image[i])
+    
+"""

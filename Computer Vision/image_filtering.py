@@ -55,6 +55,7 @@ def display_image(img):
     for row in img:
         print(row)
 
+"""
 img = create_image()
 filter_ = [
     [1,1,2,1,1],
@@ -74,3 +75,4 @@ display_image(gy)
 
 gimg = grad_image(gx, gy)
 display_image(gimg)
+"""
