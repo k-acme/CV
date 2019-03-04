@@ -21,7 +21,7 @@ cap = cv2.VideoCapture(0)
 while(True):
     ret, frame = cap.read()
     gr = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    ratio = 3
+    ratio = 10
     gr_down_sampled = imagesampler.down_sample_2d(gr, len(gr[0])/ratio, len(gr)/ratio)
     verfilteredimagearr = imagefilter.filter_image(gr_down_sampled, ver_filter, 1)
     framex = cv2.UMat(numpy.array(imagereader.fromarray(numpy.asarray(verfilteredimagearr)), dtype=numpy.uint8))
